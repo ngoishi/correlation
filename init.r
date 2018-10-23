@@ -1,10 +1,14 @@
+# init.R
 #
-# Example R code to install packages
-# See http://cran.r-project.org/doc/manuals/R-admin.html#Installing-packages for details
+# Example R code to install packages if not already installed
 #
 
-###########################################################
-# Update this line with the R packages to install:
+my_packages = c("shinythemes","shinydashboard","MASS","ggplot2")
 
-install.packages("plyr",dependencies=TRUE)
+install_if_missing = function(p) {
+  if (p %in% rownames(installed.packages()) == FALSE) {
+    install.packages(p, dependencies = TRUE)
+  }
+}
 
+invisible(sapply(my_packages, install_if_missing))
